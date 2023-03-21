@@ -24,29 +24,41 @@ const Home = ({ navigation }) => {
         contentContainerStyle={{ flexGrow: 1 }}
         keyboardShouldPersistTaps="handled"
       >
-        {categoryData.map((obj, index) => {
+        {categoryData.map((data, index) => {
+          const firstButtonData = categoryData[index * 2];
+          const secondButtonData = categoryData[index * 2 + 1];
+          console.log("firstButtonData", firstButtonData);
+          console.log("secondButtonData", secondButtonData);
           return (
             <View className="items-center py-3" key={index}>
               <View style={styles.buttonContainer}>
-                <TouchableOpacity
-                  style={[styles.button, { width: buttonWidth }]}
-                  onPress={() =>
-                    navigation.navigate("Detail", { category: obj.category })
-                  }
-                >
-                  <Text style={styles.buttonText}>{obj.category}</Text>
-                </TouchableOpacity>
-                {categoryData[index + 1] && (
+                {firstButtonData && (
                   <TouchableOpacity
                     style={[styles.button, { width: buttonWidth }]}
-                    onPress={() =>
+                    onPress={() => {
+                      console.log(firstButtonData.category);
                       navigation.navigate("Detail", {
-                        category: categoryData[index + 1].category,
-                      })
-                    }
+                        category: firstButtonData.category,
+                      });
+                    }}
                   >
                     <Text style={styles.buttonText}>
-                      {categoryData[index + 1].category}
+                      {firstButtonData.category}
+                    </Text>
+                  </TouchableOpacity>
+                )}
+                {secondButtonData && (
+                  <TouchableOpacity
+                    style={[styles.button, { width: buttonWidth }]}
+                    onPress={() => {
+                      console.log(secondButtonData.category);
+                      navigation.navigate("Detail", {
+                        category: secondButtonData.category,
+                      });
+                    }}
+                  >
+                    <Text style={styles.buttonText}>
+                      {secondButtonData.category}
                     </Text>
                   </TouchableOpacity>
                 )}
