@@ -2,6 +2,7 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import Home from "../pages/home";
 import Profile from "../pages/profile";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { Detail } from "../pages/detail";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -19,6 +20,16 @@ export default function MyTabs() {
         options={{
           tabBarIcon: ({ color }) => (
             <AntDesign name="home" color={color} size={26} />
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name="Detail"
+        component={Detail}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="profile" color={color} size={26} />
           ),
         }}
       />
