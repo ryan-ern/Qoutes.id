@@ -13,7 +13,7 @@ import { obj } from "../database";
 
 const Home = () => {
   let storingLink = obj;
-  const [link, setLink] = React.useState("");
+  // const [link, setLink] = React.useState("");
 
   return (
     <View className="flex-1 pt-4 pb-3">
