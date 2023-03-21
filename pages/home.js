@@ -11,9 +11,8 @@ import * as React from "react";
 import Detail from "./detail";
 import { obj } from "../database";
 
-const Home = () => {
-  let storingLink = obj;
-  // const [link, setLink] = React.useState("");
+const Home = ({ navigation }) => {
+  let categoryData = obj;
 
   return (
     <View className="flex-1 pt-4 pb-3">
@@ -21,12 +20,16 @@ const Home = () => {
         contentContainerStyle={{ flexGrow: 1 }}
         keyboardShouldPersistTaps="handled"
       >
-        {storingLink.map((obj) => {
+        {categoryData.map((obj) => {
           return (
             <View className="items-center py-3">
               <View className="flex-row justify-around items-center bg-violet-200 w-10/12 rounded-xl">
-                <TouchableOpacity onPress={() => Linking.openURL(obj.category)}>
-                  <Detail linked={obj.category} />
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("Details", { category: obj.category })
+                  }
+                >
+                  {/* <Detail linked={obj.category} /> */}
                 </TouchableOpacity>
               </View>
             </View>
@@ -38,13 +41,13 @@ const Home = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: "#fff",
+//     justifyContent: "center",
+//     alignItems: "center",
+//   },
+// });
 
 export default Home;

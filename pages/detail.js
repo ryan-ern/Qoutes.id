@@ -1,9 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import * as React from "react";
+import { Home } from "./home";
 
-export const Detail = (props) => {
-  const URL = "https://api.api-ninjas.com/v1/quotes=" + props.linked;
+export const Detail = (route, navigation) => {
+  const { category } = route.params;
+  const URL = "https://api.api-ninjas.com/v1/quotes=" + props.category;
   const api = "/0RKpn+Y98+7IEN2wl574A==xbtMEoEGG670twEI";
   const [data, setData] = React.useState([]);
 

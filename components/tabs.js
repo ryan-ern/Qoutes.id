@@ -1,6 +1,5 @@
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import Home from "../pages/home";
-import Detail from "../pages/detail";
 import Profile from "../pages/profile";
 import AntDesign from "react-native-vector-icons/AntDesign";
 
