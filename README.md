@@ -111,7 +111,11 @@ npm install -f
 - jika sudah coba login dan pergi ke menu <a href="https://api-ninjas.com/profile">profile</a>
 - lalu pilih button `Show Api Key`
 - pergi ke folder pages dan buka detail.js
-- pada line `35` isi dengan api anda.
+- pada line 35 terdapat
+```
+const api = "API_KEY_HERE";
+```
+- ubah `API_KEY_HERE` dengan api anda.
 - jika ingin di jalankan dengan android maka gunakan syntax berikut 
 ```
 npm run android
