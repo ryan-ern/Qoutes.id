@@ -1,5 +1,6 @@
 # Qoutes.Id
 Download <a href="https://expo.dev/artifacts/eas/vZeqJBqAn8FzyJCZvjzsJA.apk">Qoutes.id</a>
+<br/>Ryan Ernanda - 120140154
 
 ## Screenshoots
 <details>
