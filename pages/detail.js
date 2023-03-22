@@ -32,7 +32,7 @@ const store = createStore(reducer);
 export const Detail = ({ route }) => {
   const category = route.params?.category || "";
   const URL = "https://api.api-ninjas.com/v1/quotes?category=" + category;
-  const api = "/0RKpn+Y98+7IEN2wl574A==xbtMEoEGG670twEI";
+  const api = "API_KEY_HERE";
   const [data, setData] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const copiedText = store.getState().copiedText;
