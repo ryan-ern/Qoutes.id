@@ -22,12 +22,13 @@ const Home = ({ navigation }) => {
       style={{
         flex: 1,
         paddingTop: StatusBar.currentHeight,
-        backgroundColor: "white",
+        backgroundColor: "#EDF1D6",
       }}
     >
       <Text style={styles.title}>
-        qoutes.id aims to provide motivation, inspiration, reminders, and much
-        more please select a category below
+        <Text style={styles.titleHead}>Qoutes.id</Text> aims to provide
+        motivation, inspiration, reminders, and much more please select a
+        category below
       </Text>
       <ScrollView
         contentContainerStyle={{ flexGrow: 1, marginTop: 5 }}
@@ -82,7 +83,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     textAlign: "center",
-    marginVertical: 20,
+    marginVertical: 5,
+    color: "#40513B",
+  },
+  titleHead: {
+    color: "#609966",
   },
   buttonContainer: {
     flex: 1,
@@ -92,7 +97,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   button: {
-    backgroundColor: "purple",
+    backgroundColor: "#9DC08B",
     borderRadius: 10,
     paddingVertical: 15,
     alignItems: "center",

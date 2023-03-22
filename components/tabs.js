@@ -10,9 +10,9 @@ export default function MyTabs() {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      activeColor="#379392"
-      inactiveColor="#17301C"
-      barStyle={{ backgroundColor: "#744FC6", height: 70 }}
+      activeColor="#40513B"
+      inactiveColor="#FFFFFF"
+      barStyle={{ backgroundColor: "#609966", height: 70 }}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color }) => {
           let iconName;

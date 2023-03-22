@@ -1,13 +1,41 @@
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, FlatList, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import * as React from "react";
+import * as Clipboard from "expo-clipboard";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import * as Font from "expo-font";
+
+const iconCopy = <AntDesign name="copy1" color="white" size={26} />;
+
+const initialState = { copiedText: "" };
+
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "SET_COPIED_TEXT":
+      return { ...state, copiedText: action.payload };
+    default:
+      return state;
+  }
+};
+
+const store = createStore(reducer);
 
 export const Detail = ({ route }) => {
-  const category = route.params?.category || ""; // gunakan optional chaining (?.) dan nullish coalescing (||) operator
+  const category = route.params?.category || "";
   const URL = "https://api.api-ninjas.com/v1/quotes?category=" + category;
   const api = "/0RKpn+Y98+7IEN2wl574A==xbtMEoEGG670twEI";
   const [data, setData] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
+  const copiedText = store.getState().copiedText;
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -18,7 +46,7 @@ export const Detail = ({ route }) => {
     })
       .then((response) => {
         if (response.status === 502) {
-          alert("Terjadi kesalahan pada server");
+          alert("Internal Server Error..., Please Choose Another Category!");
         }
         return response.json();
       })
@@ -33,32 +61,67 @@ export const Detail = ({ route }) => {
       .finally(() => setIsLoading(false));
   }, [category]);
 
+  const copyToClipboard = async (quote) => {
+    await Clipboard.setStringAsync(quote);
+    store.dispatch({ type: "SET_COPIED_TEXT", payload: quote });
+    alert("Quote copy Success!");
+  };
+
+  const [fontLoaded, setFontLoaded] = React.useState(false);
+
+  React.useEffect(() => {
+    const loadFont = async () => {
+      await Font.loadAsync({
+        "monday-feelings": require("../assets/fonts/MondayFeelings.ttf"),
+      });
+      setFontLoaded(true);
+    };
+    loadFont();
+  }, []);
+
+  if (!fontLoaded) {
+    return null;
+  }
+
   if (isLoading) {
     return (
       <View style={styles.container}>
-        <Text>Tunggu sebentar...</Text>
+        <Text>Wait A Moment...</Text>
+        <Text>We Are Looking The Best For You</Text>
       </View>
     );
   } else if (data.length === 0) {
     return (
       <View style={styles.container}>
-        <Text>Kategori masih kosong.</Text>
+        <Text>Category Is Null!</Text>
       </View>
     );
   }
 
   const renderCard = ({ item }) => {
     return (
-      <View className="flex-1 pt-4 pb-3" style={styles.card}>
+      <View style={styles.card}>
         <ScrollView
           contentContainerStyle={{ flexGrow: 1, marginTop: 5 }}
           keyboardShouldPersistTaps="handled"
         >
-          <Text style={styles.quote}>
-            "{item.quote}"{item.message}
+          <Text style={{ ...styles.quote, fontFamily: "monday-feelings" }}>
+            "{item.quote}"
           </Text>
           <Text style={styles.author}>Author : {item.author}</Text>
           <Text style={styles.category}>Category : {item.category}</Text>
+          <TouchableOpacity
+            style={styles.copy}
+            onPress={() =>
+              copyToClipboard(
+                item.quote +
+                  "These quotes are made by someone special, viz " +
+                  item.author
+              )
+            }
+          >
+            {iconCopy}
+          </TouchableOpacity>
         </ScrollView>
       </View>
     );
@@ -85,14 +148,20 @@ export const Detail = ({ route }) => {
 };
 
 const styles = StyleSheet.create({
+  copy: {
+    backgroundColor: "#609966",
+    alignSelf: "flex-end",
+    padding: 5,
+    borderRadius: 5,
+  },
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#EDF1D6",
     justifyContent: "center",
     alignItems: "center",
   },
   card: {
-    backgroundColor: "#fff",
+    backgroundColor: "#9DC08B",
     borderRadius: 10,
     padding: 20,
     margin: 10,
@@ -106,6 +175,7 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   quote: {
+    fontFamily: "monday-feelings",
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 10,
