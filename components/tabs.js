@@ -13,36 +13,23 @@ export default function MyTabs() {
       activeColor="#379392"
       inactiveColor="#17301C"
       barStyle={{ backgroundColor: "#744FC6", height: 70 }}
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color }) => {
+          let iconName;
+          if (route.name === "Home") {
+            iconName = "home";
+          } else if (route.name === "Profile") {
+            iconName = "user";
+          } else if (route.name === "Detail") {
+            iconName = "book";
+          }
+          return <AntDesign name={iconName} color={color} size={26} />;
+        },
+      })}
     >
-      <Tab.Screen
-        name="Home"
-        component={Home}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <AntDesign name="home" color={color} size={26} />
-          ),
-        }}
-      />
-
-      <Tab.Screen
-        name="Detail"
-        component={Detail}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <AntDesign name="profile" color={color} size={26} />
-          ),
-        }}
-      />
-
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <AntDesign name="profile" color={color} size={26} />
-          ),
-        }}
-      />
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Detail" component={Detail} />
+      <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
 }

@@ -1,11 +1,11 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 
 export default function Profile() {
   return (
     <View style={styles.container}>
       <Text>Profile</Text>
-      <StatusBar style="auto" />
+      <StatusBar style="dark" />
     </View>
   );
 }

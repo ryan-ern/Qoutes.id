@@ -3,10 +3,8 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Linking,
   ScrollView,
   StatusBar,
-  Button,
   Dimensions,
 } from "react-native";
 import * as React from "react";
@@ -19,46 +17,53 @@ const Home = ({ navigation }) => {
   const buttonWidth = (windowWidth - 40) / 2 - 10; // 40 is total horizontal margin, 10 is space between buttons
 
   return (
-    <View className="flex-1 pt-4 pb-3">
+    <View
+      className="flex-1 pt-4 pb-3"
+      style={{
+        flex: 1,
+        paddingTop: StatusBar.currentHeight,
+        backgroundColor: "white",
+      }}
+    >
+      <Text style={styles.title}>
+        qoutes.id aims to provide motivation, inspiration, reminders, and much
+        more please select a category below
+      </Text>
       <ScrollView
-        contentContainerStyle={{ flexGrow: 1 }}
+        contentContainerStyle={{ flexGrow: 1, marginTop: 5 }}
         keyboardShouldPersistTaps="handled"
       >
         {categoryData.map((data, index) => {
-          const firstButtonData = categoryData[index * 2];
-          const secondButtonData = categoryData[index * 2 + 1];
-          console.log("firstButtonData", firstButtonData);
-          console.log("secondButtonData", secondButtonData);
           return (
             <View className="items-center py-3" key={index}>
               <View style={styles.buttonContainer}>
-                {firstButtonData && (
+                {categoryData[index * 2] && (
                   <TouchableOpacity
                     style={[styles.button, { width: buttonWidth }]}
                     onPress={() => {
-                      console.log(firstButtonData.category);
+                      console.log(categoryData[index * 2].category);
                       navigation.navigate("Detail", {
-                        category: firstButtonData.category,
+                        category: categoryData[index * 2].category,
                       });
                     }}
                   >
                     <Text style={styles.buttonText}>
-                      {firstButtonData.category}
+                      {categoryData[index * 2].category}
                     </Text>
                   </TouchableOpacity>
                 )}
-                {secondButtonData && (
+                {categoryData[index * 2 + 1] && (
                   <TouchableOpacity
                     style={[styles.button, { width: buttonWidth }]}
                     onPress={() => {
-                      console.log(secondButtonData.category);
+                      console.log(categoryData[index * 2 + 1].category);
                       navigation.navigate("Detail", {
-                        category: secondButtonData.category,
+                        category: categoryData[index * 2 + 1].category,
                       });
                     }}
                   >
                     <Text style={styles.buttonText}>
-                      {secondButtonData.category}
+                      {categoryData[index * 2 + 1].category}
                     </Text>
                   </TouchableOpacity>
                 )}
@@ -67,13 +72,20 @@ const Home = ({ navigation }) => {
           );
         })}
       </ScrollView>
-      <StatusBar style="white" />
+      <StatusBar style="dark" />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginVertical: 20,
+  },
   buttonContainer: {
+    flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     marginHorizontal: 20,
